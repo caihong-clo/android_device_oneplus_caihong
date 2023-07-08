@@ -6,4 +6,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Default for Settings.Global.DEVICE_NAME $1=MODEL-->
     <string name="def_device_name_simple" translatable="false">OnePlus Pad Pro</string>
+
+    <!-- Enable auto rotation switching by default -->
+    <bool name="def_accelerometer_rotation">true</bool>
 </resources>

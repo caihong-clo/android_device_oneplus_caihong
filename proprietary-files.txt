@@ -2,9 +2,9 @@
 ## are from OnePlus 12 (CPH2581_15.0.0.820(EX01)).
 
 # ACDB
-odm/etc/acdbdata/Audio_Parameter_Version.txt
 odm/etc/acdbdata/FTM/acdb_cal.acdb
 odm/etc/acdbdata/FTM/workspaceFileXml.qwsp
+odm/etc/acdbdata/Audio_Parameter_Version.txt
 odm/etc/acdbdata/acdb_cal.acdb
 
 # Audio
@@ -75,8 +75,6 @@ odm/etc/lvacfs_params/2mic/audiozoom_8.txt
 odm/etc/lvacfs_params/2mic/audiozoom_9.txt
 
 # Camera
-odm/etc/camera/CameraHWConfiguration.config
-odm/etc/camera/camera_engmode.xml
 odm/etc/camera/cfr_bin/CFR_OPlus_EF017_UW_snapshot.bin
 odm/etc/camera/cfr_bin/CFR_imx581.bin
 odm/etc/camera/cfr_bin/CFR_lyt808.bin
@@ -95,6 +93,8 @@ odm/etc/camera/config/oplus_preview_decision_params.json
 odm/etc/camera/config/ov64b40_tele
 odm/etc/camera/config/quick_visibility_white_list
 odm/etc/camera/config/video_beauty_default_config
+odm/etc/camera/CameraHWConfiguration.config
+odm/etc/camera/camera_engmode.xml
 odm/etc/camera/settings_fdc.txt
 odm/etc/camera/settings_fdc_lite.txt
 

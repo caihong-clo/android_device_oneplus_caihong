@@ -1,0 +1,11 @@
+//
+// Copyright (C) 2025 crDroid Android Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+prebuilt_etc {
+    name: "init.caihong.rc",
+    src: "init.caihong.rc",
+    sub_dir: "init",
+    vendor: true,
+}

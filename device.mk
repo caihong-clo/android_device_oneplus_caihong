@@ -30,6 +30,10 @@ PRODUCT_PACKAGES += \
 # GMS
 WITH_GMS_COMMS_SUITE := false
 
+# Init
+PRODUCT_PACKAGES += \
+    init.caihong.rc
+
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/Vendor_22d9_Product_3869.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/Vendor_22d9_Product_3869.idc

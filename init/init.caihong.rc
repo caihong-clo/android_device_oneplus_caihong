@@ -1,0 +1,11 @@
+#
+# Copyright (C) 2025 crDroid Android Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+on fs && property:ro.boot.hardware.revision=CN
+    setprop ro.product.marketname "OnePlus Pad Pro"
+
+on fs && property:ro.boot.hardware.revision=GLO
+    setprop ro.product.marketname "OnePlus Pad 2"

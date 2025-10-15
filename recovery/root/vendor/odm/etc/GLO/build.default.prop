@@ -1,2 +1,6 @@
+# Device info
 ro.product.odm.name=OPD2403EEA
 ro.vendor.oplus.regionmark=EUEX
+
+# Device name
+ro.product.marketname=OnePlus Pad 2

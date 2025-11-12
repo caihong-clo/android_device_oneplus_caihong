@@ -1,9 +1,18 @@
 //
-// Copyright (C) 2022 The LineageOS Project
+// SPDX-FileCopyrightText: The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
 runtime_resource_overlay {
-    name: "OPlusSettingsProviderResTarget",
+    name: "OPlusSettingsProviderResTarget_CN",
+    manifest: "AndroidManifest_CN.xml",
+    resource_dirs: ["res_cn"],
+    device_specific: true,
+}
+
+runtime_resource_overlay {
+    name: "OPlusSettingsProviderResTarget_GLO",
+    manifest: "AndroidManifest_GLO.xml",
+    resource_dirs: ["res_glo"],
     device_specific: true,
 }

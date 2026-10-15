@@ -28,8 +28,8 @@ TARGET_KERNEL_ADDITIONAL_FLAGS += \
 $(call soong_config_set,qtipower,mode_ext_lib,//device/oneplus/caihong:power-ext-caihong)
 
 # Properties
-TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
+TARGET_ODM_PROP += $(DEVICE_PATH)/properties/odm.prop
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/properties/vendor.prop
 
 # Recovery
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 103

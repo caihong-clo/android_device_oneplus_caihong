@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 The crDroid Android Project
+     SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <!-- Override AOSP's extra-wide-screen reversal: notifications stay on the left. -->
+    <bool name="config_notificationShadeOnTopEnd">false</bool>
+</resources>

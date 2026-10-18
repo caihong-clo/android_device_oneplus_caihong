@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 The crDroid Android Project
+     SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <!-- Use native independent panels, retaining crDroid's QS tile grid and editor. -->
+    <bool name="config_dualShadeEnabledByDefault">true</bool>
+    <bool name="config_isFullWidthShade">false</bool>
+    <bool name="config_notificationShadeOnTopEnd">false</bool>
+
+    <!-- The left half opens notifications; the right half opens Quick Settings (LTR). -->
+    <item name="config_invocationGestureSplitRatio" format="float" type="dimen">0.5</item>
+</resources>

@@ -23,10 +23,6 @@ TARGET_KERNEL_ADDITIONAL_FLAGS += \
     CONFIG_CAIHONG_DTB=y \
     CAIHONG_DISPLAY_DRIVER=y
 
-# Power: caihong-only mode extension (adds Battery Saver CPU/GPU cap).
-# Set here so it overrides sm8650-common's power-ext-oplus.
-$(call soong_config_set,qtipower,mode_ext_lib,//device/oneplus/caihong:power-ext-caihong)
-
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/properties/odm.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/properties/vendor.prop

@@ -1,3 +1,7 @@
 # Regional properties
 ro.product.property_source_order=odm,vendor,product,system_ext,system
 import /odm/etc/${ro.boot.hardware.revision}/build.default.prop
+
+# Overrides for values the QTI display component also sets in vendor
+ro.surface_flinger.game_default_frame_rate_override=144
+ro.surface_flinger.set_touch_timer_ms=500

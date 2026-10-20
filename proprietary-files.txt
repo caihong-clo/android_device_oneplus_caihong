@@ -1,11 +1,8 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
 ## are from OnePlus Pad 2 (OPD2403_16.0.5.702(EX01)).
 
-# Current blobs with deps disabled:
 # com.oplus.node.mvgsat, com.oplus.node.sstabphoto, com.qti.node.dewarp, com.qti.chi.override, libcamximageformatutils, libchifeature2 depends on multiple versions of the same aidl_interface: android.hardware.graphics.allocator-V1-ndk, android.hardware.graphics.allocator-V2-ndk-source
-# vendor.qti.hardware.display.composer-service depends on multiple versions of the same aidl_interface: android.hardware.graphics.composer3-V2-ndk-source, android.hardware.graphics.composer3-V3-ndk-source
 
-# Current blobs with disabled checkelf
 # libsdmcore depends on symbol provided by libbase-v33
 
 # ACDB
@@ -655,13 +652,6 @@ vendor/bin/hw/vendor.qti.hardware.display.color-service
 vendor/bin/ppd
 vendor/etc/init/vendor.qti.hardware.display.color-service.rc
 vendor/lib64/libdisp-aba.so
-vendor/lib64/vendor.display.color@1.0.so
-vendor/lib64/vendor.display.color@1.1.so
-vendor/lib64/vendor.display.color@1.2.so
-vendor/lib64/vendor.display.color@1.3.so
-vendor/lib64/vendor.display.color@1.4.so
-vendor/lib64/vendor.display.color@1.5.so
-vendor/lib64/vendor.display.postproc@1.0.so
 
 # Display firmware
 vendor/firmware/dpAP_full.mbn

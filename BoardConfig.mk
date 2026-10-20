@@ -13,7 +13,7 @@ include device/oneplus/sm8650-common/BoardConfigCommon.mk
 DEVICE_PATH := device/oneplus/caihong
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := OP5D77L1,OP5DAAL1
+TARGET_OTA_ASSERT_DEVICE := OP5DAAL1
 
 # Display
 TARGET_SCREEN_DENSITY := 420

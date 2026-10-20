@@ -281,4 +281,8 @@
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
+
+    <!-- Desktop windowing on the internal display (tablet) -->
+    <bool name="config_isDesktopModeSupported">true</bool>
+    <bool name="config_canInternalDisplayHostDesktops">true</bool>
 </resources>

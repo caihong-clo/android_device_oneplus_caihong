@@ -3,6 +3,10 @@ debug.sf.ignore_hwc_physical_display_orientation=true
 ro.bootanim.set_orientation_4630946941668558211=ORIENTATION_90
 ro.surface_flinger.primary_display_orientation=ORIENTATION_270
 vendor.display.idle_time=0
+# The panel runs as a quad pipe (4 layer mixers) and the kernel only accepts the hardware
+# rounded-corner mask with 1 or 2, so every rotation re-applied it and failed two commits,
+# dropping frames (visible flicker). The corners look the same without it.
+vendor.display.enable_rounded_corner=0
 
 # Bluetooth
 bluetooth.device.default_name=OnePlus Pad 2

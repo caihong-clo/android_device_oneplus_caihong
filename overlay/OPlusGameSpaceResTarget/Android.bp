@@ -1,0 +1,9 @@
+//
+// SPDX-FileCopyrightText: 2026 PenguinOS
+// SPDX-License-Identifier: Apache-2.0
+//
+
+runtime_resource_overlay {
+    name: "OPlusGameSpaceResTarget",
+    device_specific: true,
+}

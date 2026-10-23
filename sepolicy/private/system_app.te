@@ -1,0 +1,2 @@
+# GameSpace: touch firmware game tuning
+hal_client_domain(system_app, vendor_hal_oplus_touch)

@@ -51,6 +51,7 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 PRODUCT_PACKAGES += \
     OPlusFrameworksResTarget \
+    OPlusGameSpaceResTarget \
     OPlusPenResTarget \
     OPlusSettingsProviderResTarget_CN \
     OPlusSettingsProviderResTarget_GLO \

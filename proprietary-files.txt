@@ -560,6 +560,9 @@ vendor/firmware/tof8801_firmware.bin
 # Charger firmware
 odm/firmware/fastchg/charging_thermal_config_default.txt
 
+# Context hub
+odm/etc/permissions/android.hardware.context_hub.xml
+
 # Display calibration data
 vendor/etc/display/qdcm_calib_data_Dual_dsi_csot_nt36532_video_mode_panel_with_DSC.json
 

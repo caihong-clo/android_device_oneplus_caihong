@@ -9,3 +9,8 @@ on fs && property:ro.boot.hardware.revision=CN
 
 on fs && property:ro.boot.hardware.revision=GLO
     setprop ro.product.marketname "OnePlus Pad 2"
+
+on property:vendor.post_boot.parsed=1
+    # Stock caps the prime cluster like the others. WALT lifts the cap
+    # under sustained load or a full throttle boost.
+    write /proc/sys/walt/sched_fmax_cap "1804800 2707200 2707200 3187200"

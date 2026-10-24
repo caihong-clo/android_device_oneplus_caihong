@@ -25,7 +25,12 @@ TARGET_KERNEL_ADDITIONAL_FLAGS += \
 TARGET_KERNEL_CONFIG += vendor/oplus/caihong.config
 
 # Kernel modules
-BOARD_VENDOR_KERNEL_MODULES_LOAD += msm_lmh_dcvs.ko
+BOARD_VENDOR_KERNEL_MODULES_LOAD += \
+    msm_lmh_dcvs.ko \
+    oplus_bsp_kshrink_slabd.ko
+
+TARGET_KERNEL_EXT_MODULES += \
+    oplus/kernel/mm/kshrink_slabd:kbuild
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/properties/odm.prop

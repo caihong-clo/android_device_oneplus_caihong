@@ -22,6 +22,10 @@ TARGET_SCREEN_DENSITY := 420
 TARGET_KERNEL_ADDITIONAL_FLAGS += \
     CONFIG_CAIHONG_DTB=y \
     CAIHONG_DISPLAY_DRIVER=y
+TARGET_KERNEL_CONFIG += vendor/oplus/caihong.config
+
+# Kernel modules
+BOARD_VENDOR_KERNEL_MODULES_LOAD += msm_lmh_dcvs.ko
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/properties/odm.prop

@@ -7,6 +7,10 @@ vendor.display.idle_time=0
 # Bluetooth
 bluetooth.device.default_name=OnePlus Pad 2
 
+# CPU
+# Stock post_boot input boost duration (the common init.aospa.rc default is 200 ms)
+ro.vendor.input_boost_ms=100
+
 # Graphics
 ro.surface_flinger.set_idle_timer_ms=450
 

@@ -32,6 +32,9 @@ BOARD_VENDOR_KERNEL_MODULES_LOAD += \
 TARGET_KERNEL_EXT_MODULES += \
     oplus/kernel/mm/kshrink_slabd:kbuild
 
+# Power: caihong mode extension (Battery Saver CPU/GPU cap, game loading boost).
+TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
+
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/properties/odm.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/properties/vendor.prop

@@ -4,4 +4,7 @@ import /odm/etc/${ro.boot.hardware.revision}/build.default.prop
 
 # Overrides for values the QTI display component also sets in vendor
 ro.surface_flinger.game_default_frame_rate_override=144
-ro.surface_flinger.set_touch_timer_ms=500
+ro.surface_flinger.set_touch_timer_ms=200
+
+# Stock keeps the client composition cache on (the common odm.prop default turns it off)
+debug.sf.disable_client_composition_cache=0

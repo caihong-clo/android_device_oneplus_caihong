@@ -27,6 +27,12 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_PACKAGES += \
     libui_shim.vendor
 
+# Perf
+# Pad 2 tuned copy of the common perfconfigstore.xml. Listed before common.mk is inherited, so it
+# takes the destination over the common copy.
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/perf/perfconfigstore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfconfigstore.xml
+
 # GMS
 WITH_GMS_COMMS_SUITE := false
 

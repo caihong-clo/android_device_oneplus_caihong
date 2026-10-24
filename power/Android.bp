@@ -1,0 +1,18 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_static {
+    name: "libpowerfeature_ext_caihong",
+    srcs: ["power-feature.cpp"],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "vendor.aospa.power-V1-ndk",
+    ],
+    whole_static_libs: [
+        "//hardware/oplus:vendor.oplus.hardware.touch-V2-ndk",
+    ],
+    vendor: true,
+}

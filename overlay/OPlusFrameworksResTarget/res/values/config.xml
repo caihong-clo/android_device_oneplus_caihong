@@ -286,6 +286,10 @@
     <bool name="config_isDesktopModeSupported">true</bool>
     <bool name="config_canInternalDisplayHostDesktops">true</bool>
 
+    <!-- Let the AOSPA KeyHandler turn screen-off gesture keys into actions.
+         PhoneWindowManager leaves KEYCODE_WAKEUP to it. -->
+    <bool name="config_enableKeyHandler">true</bool>
+
     <!-- Double tap to wake: the HBP touch driver reports KEY_WAKEUP (scan code 143)
          for screen-off gestures, and only the double tap gesture is enabled. -->
     <integer name="config_doubleTapKeyCode">143</integer>

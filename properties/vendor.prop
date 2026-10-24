@@ -6,6 +6,7 @@ vendor.display.idle_time=0
 
 # Bluetooth
 bluetooth.device.default_name=OnePlus Pad 2
+persist.vendor.qcom.bluetooth.aptxadaptiver2_2_support=true
 
 # CPU
 # Stock post_boot input boost duration (the common init.aospa.rc default is 200 ms)

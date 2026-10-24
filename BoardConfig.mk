@@ -34,6 +34,8 @@ TARGET_KERNEL_EXT_MODULES += \
 
 # Power: caihong mode extension (Battery Saver CPU/GPU cap, game loading boost).
 TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
+# Power feature: double tap to wake through the Oplus touch HAL.
+TARGET_POWER_FEATURE_EXT_LIB := //$(DEVICE_PATH):libpowerfeature_ext_caihong
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/properties/odm.prop

@@ -18,3 +18,8 @@ on property:vendor.post_boot.parsed=1
     # Give the foreground more CPU time than background work when busy.
     write /dev/cpuctl/top-app/cpu.shares 5120
     write /dev/cpuctl/foreground/cpu.shares 4096
+
+    # Keep compaction away from mlocked pages. PinnerService locks the
+    # framework, SystemUI and launcher code in memory; migrating those
+    # pages makes their next access fault in the middle of a frame.
+    write /proc/sys/vm/compact_unevictable_allowed 0

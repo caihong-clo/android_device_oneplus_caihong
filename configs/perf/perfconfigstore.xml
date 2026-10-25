@@ -117,5 +117,8 @@ ________________________________________________________________________________
                 <Prop Name="ro.vendor.qti.sys.fw.bservice_limit"               Value="5"      Ram="4"        Target="cliffs"/>
                 <Prop Name="ro.vendor.qti.sys.fw.bservice_enable"              Value="true"                  Target="cliffs"/>
 
+                <!-- Same as the common copy: let the power HAL advertise EXPENSIVE_RENDERING (0x10A5). -->
+                <Prop Name="vendor.perf.expensive_rendering" Value="1" />
+
     </PerfConfigs>
 </PerfConfigsStore>

@@ -24,6 +24,15 @@ TARGET_KERNEL_ADDITIONAL_FLAGS += \
     CAIHONG_DISPLAY_DRIVER=y
 TARGET_KERNEL_CONFIG += vendor/oplus/caihong.config
 
+# Kernel optimizations: ThinLTO like the stock GKI build, Polly loop
+# optimizations and a larger inliner budget in the ThinLTO backend (the
+# linker, where LTO code generation runs) and scheduling tuned for the
+# Cortex-A720 cores, which run most kernel work on this SoC.
+KERNEL_LTO := thin
+TARGET_KERNEL_ADDITIONAL_FLAGS += \
+    KCFLAGS="-mtune=cortex-a720 -mllvm -inline-threshold=350" \
+    KLDFLAGS="-mllvm -polly -mllvm -polly-ast-use-context -mllvm -polly-invariant-load-hoisting -mllvm -polly-loopfusion-greedy -mllvm -polly-run-inliner -mllvm -polly-run-dce -mllvm -inline-threshold=350"
+
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_LOAD += \
     msm_lmh_dcvs.ko \

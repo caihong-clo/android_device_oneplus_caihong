@@ -18,6 +18,11 @@ TARGET_OTA_ASSERT_DEVICE := OP5DAAL1
 # Display
 TARGET_SCREEN_DENSITY := 420
 
+# Kernel modules
+BOARD_VENDOR_KERNEL_MODULES_LOAD += \
+    msm_lmh_dcvs.ko \
+    oplus_bsp_kshrink_slabd.ko
+
 # Power: caihong mode extension (Battery Saver CPU/GPU cap, game loading boost).
 TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
 # Power feature: double tap to wake through the Oplus touch HAL.

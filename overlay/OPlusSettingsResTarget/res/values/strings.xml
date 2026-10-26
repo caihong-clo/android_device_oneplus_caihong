@@ -5,6 +5,5 @@
 -->
 <resources>
     <!-- Maintainer -->
-    <string name="maintainer">Official Maintainer</string>
     <string name="penguin_maintainer" translatable="false">Saikiran</string>
 </resources>

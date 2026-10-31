@@ -73,16 +73,16 @@
                 android:value="true" />
             <meta-data
                 android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.homepage" />
+                android:value="com.android.settings.category.ia.system" />
             <meta-data
                 android:name="com.android.settings.group_key"
-                android:value="top_level_system_info_category" />
+                android:value="system_general_category" />
             <meta-data
                 android:name="com.android.settings.keyhint"
-                android:value="top_level_device_settings" />
+                android:value="system_device_settings" />
             <meta-data
                 android:name="com.android.settings.order"
-                android:value="@integer/device_settings_top_level_order" />
+                android:value="@integer/device_settings_order" />
             <meta-data
                 android:name="com.android.settings.icon"
                 android:resource="@drawable/ic_settings_device" />

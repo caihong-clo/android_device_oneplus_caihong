@@ -1,0 +1,52 @@
+/*
+ * Copyright (C) 2015 The CyanogenMod Project
+ *               2017-2020 The LineageOS Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.lineageos.device.settings;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.UserHandle;
+import android.util.Log;
+
+public class BootCompletedReceiver extends BroadcastReceiver {
+    private static final String TAG = "BootCompletedReceiver";
+
+    @Override
+    public void onReceive(final Context context, Intent intent) {
+        // PenguinOS: AOSPA has no lineage-sdk LineageHardwareService, so
+        // INITIALIZE_LINEAGE_HARDWARE (Startup) never fires. Seed the slider prefs and push them
+        // to the KeyHandler here instead, once per boot (the app is directBootAware / DE storage).
+        if (Intent.ACTION_LOCKED_BOOT_COMPLETED.equals(intent.getAction())) {
+            try {
+                DeviceSettings.restoreSliderStates(context);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to restore slider states", e);
+            }
+        }
+
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            if (Constants. DEBUG) Log.i(TAG, "Boot completed - starting DeviceSettingsService");
+
+            try {
+                Intent serviceIntent = new Intent(context, DeviceSettingsService.class);
+                context.startServiceAsUser(serviceIntent, UserHandle.SYSTEM);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to start DeviceSettingsService", e);
+            }
+        }
+    }
+}

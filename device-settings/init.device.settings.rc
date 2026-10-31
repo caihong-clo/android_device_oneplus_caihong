@@ -1,0 +1,24 @@
+on boot
+    # Charger nodes (cool_down) are commonized in sm8750-common ueventd.oplus.rc
+    # and chowned by the charger driver when the attr is created. The boot
+    # trigger fires before the driver registers the node, so a chown here is
+    # inert. The display nodes below already exist here.
+    # Display
+    chown system system /sys/kernel/oplus_display/pwm_onepulse
+    chmod 0666 /sys/kernel/oplus_display/pwm_onepulse
+    chown system system /sys/kernel/oplus_display/hbm_max
+    chmod 0664 /sys/kernel/oplus_display/hbm_max
+    # AOD light mode (0 = 50 nits, 1 = 10 nits); odm init.oplus.display.rc
+    # already opens this, repeated here so we do not depend on it
+    chown system system /sys/kernel/oplus_display/aod_light_mode_set
+    chmod 0666 /sys/kernel/oplus_display/aod_light_mode_set
+    chown system system /sys/kernel/oplus_display/write_panel_reg
+    chmod 0666 /sys/kernel/oplus_display/write_panel_reg
+    # Panel test-TE counter (real DDIC refresh rate); DeviceSettingsService
+    # writes 1 at boot to enable the irq, GameBar FPS meter reads the rate
+    chown system system /sys/kernel/oplus_display/test_te
+    chmod 0664 /sys/kernel/oplus_display/test_te
+    # ADFR min fps request (0 = dynamic LTPO, N = fixed); written by
+    # HbmController only, 120 while HBM is on and 0 on release
+    chown system system /sys/kernel/oplus_display/min_fps
+    chmod 0664 /sys/kernel/oplus_display/min_fps

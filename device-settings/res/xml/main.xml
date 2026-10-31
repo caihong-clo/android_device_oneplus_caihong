@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2021-2024 crDroid Android Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:settings="http://schemas.android.com/apk/res/org.lineageos.device.settings">
+
+    <PreferenceCategory
+        android:key="slider"
+        android:title="@string/notification_slider_category_title">
+
+        <ListPreference
+            android:key="slider_usage"
+            android:icon="@drawable/ic_slider"
+            android:dialogTitle="@string/notification_slider_usage_title"
+            android:title="@string/notification_slider_usage_title"
+            android:entries="@array/notification_slider_usage_entries"
+            android:entryValues="@array/notification_slider_usage_entry_values"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="action_top_position"
+            android:icon="@drawable/ic_up_icon"
+            android:dialogTitle="@string/notification_slider_selection_dialog_title"
+            android:title="@string/notification_slider_top_position"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="action_middle_position"
+            android:icon="@drawable/ic_middle_icon"
+            android:dialogTitle="@string/notification_slider_selection_dialog_title"
+            android:title="@string/notification_slider_middle_position"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="action_bottom_position"
+            android:icon="@drawable/ic_down_icon"
+            android:dialogTitle="@string/notification_slider_selection_dialog_title"
+            android:title="@string/notification_slider_bottom_position"
+            android:summary="%s" />
+
+        <!-- App pickers, only visible when slider usage is "Launch app" -->
+        <Preference
+            android:key="slider_app_top_position"
+            android:icon="@drawable/ic_up_icon"
+            android:title="@string/notification_slider_top_position"
+            android:summary="@string/notification_slider_app_none"
+            android:persistent="false" />
+
+        <Preference
+            android:key="slider_app_middle_position"
+            android:icon="@drawable/ic_middle_icon"
+            android:title="@string/notification_slider_middle_position"
+            android:summary="@string/notification_slider_app_none"
+            android:persistent="false" />
+
+        <Preference
+            android:key="slider_app_bottom_position"
+            android:icon="@drawable/ic_down_icon"
+            android:title="@string/notification_slider_bottom_position"
+            android:summary="@string/notification_slider_app_none"
+            android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="display_category"
+        android:title="@string/display_category_title">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_pwm"
+            android:key="onepulse_pwm"
+            android:summary="@string/onepulse_pwm_mode_summary"
+            android:title="@string/onepulse_pwm_mode_title" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_hbm"
+            android:key="hbm_max"
+            android:title="@string/hbm_title"
+            android:summary="@string/hbm_summary" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_hbm"
+            android:key="sunlight_boost"
+            android:defaultValue="true"
+            android:title="@string/sunlight_boost_title"
+            android:summary="@string/sunlight_boost_summary" />
+
+        <ListPreference
+            android:key="aod_brightness_mode"
+            android:icon="@drawable/ic_aod_brightness"
+            android:dialogTitle="@string/aod_brightness_title"
+            android:title="@string/aod_brightness_title"
+            android:entries="@array/aod_brightness_entries"
+            android:entryValues="@array/aod_brightness_values"
+            android:defaultValue="auto"
+            android:summary="%s" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="battery_category"
+        android:title="@string/battery_category_title">
+
+        <Preference
+            android:key="bypass_charging"
+            android:icon="@drawable/ic_bypass_charging"
+            android:title="@string/bypass_charging_title"
+            android:summary="@string/bypass_charging_summary"
+            android:fragment="org.lineageos.device.settings.bypasschrg.BypassChargingFragment" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_fast_charging"
+            android:key="fast_charging"
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+            android:title="@string/fast_charging_title"
+            android:summary="@string/fast_charging_summary" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_night_charging"
+            android:key="night_charging"
+            android:defaultValue="false"
+            android:dependency="fast_charging"
+            android:title="@string/night_charging_title"
+            android:summary="@string/night_charging_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="gaming"
+        android:title="@string/gaming_category_title">
+
+    </PreferenceCategory>
+</PreferenceScreen>

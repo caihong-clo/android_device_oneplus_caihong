@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Between System (10) and About phone (20) in top_level_settings.xml, which PenguinOS
+         uses for its homepage; unknown keys get the middle card layout there. -->
+    <integer name="device_settings_top_level_order">15</integer>
+</resources>

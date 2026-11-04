@@ -4,3 +4,6 @@ ro.vendor.oplus.regionmark=EUEX
 
 # Device name
 ro.product.marketname=OnePlus Pad 2
+
+# Widevine
+vendor.wv.oemcrypto.debug.enable_prov40=true

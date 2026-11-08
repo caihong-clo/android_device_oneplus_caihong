@@ -23,3 +23,8 @@ on property:vendor.post_boot.parsed=1
     # framework, SystemUI and launcher code in memory; migrating those
     # pages makes their next access fault in the middle of a frame.
     write /proc/sys/vm/compact_unevictable_allowed 0
+
+on boot
+    # Power HAL: GPU limit for battery saver
+    chown system system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/max_pwrlevel

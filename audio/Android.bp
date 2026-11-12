@@ -1,0 +1,20 @@
+//
+// SPDX-FileCopyrightText: 2026 The PenguinOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "liboplus_spatializer_shim",
+    vendor: true,
+    relative_install_path: "soundfx",
+    srcs: ["SpatializerShim.cpp"],
+    shared_libs: ["liblog"],
+    header_libs: [
+        "libaudio_system_headers",
+        "libhardware_headers",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}

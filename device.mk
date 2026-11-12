@@ -6,6 +6,9 @@
 
 TARGET_IS_TABLET := true
 
+# Wi-Fi only: no modem, so skip the dialer and telephony stack.
+TARGET_NO_TELEPHONY := true
+
 # AAPT
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi

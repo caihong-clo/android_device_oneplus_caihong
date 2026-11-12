@@ -21,6 +21,7 @@ TARGET_SCREEN_WIDTH := 2120
 
 # Audio
 PRODUCT_VENDOR_PROPERTIES += \
+    ro.audio.spatializer_bt_type_param=0x100100c1 \
     ro.audio.spatializer_channel_count_param=0x100100ba
 
 # Carrier

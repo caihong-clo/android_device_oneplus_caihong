@@ -19,6 +19,10 @@ PRODUCT_COPY_FILES += \
 TARGET_SCREEN_HEIGHT := 3000
 TARGET_SCREEN_WIDTH := 2120
 
+# Audio
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.audio.spatializer_channel_count_param=0x100100ba
+
 # Carrier
 PRODUCT_VENDOR_PROPERTIES += \
     ro.carrier=wifi-only

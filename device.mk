@@ -90,6 +90,9 @@ PRODUCT_COPY_FILES += $(foreach f,$(REGIONAL_PROP_FILES), \
     $(f):$(TARGET_COPY_OUT_ODM)/etc/$(patsubst $(LOCAL_PATH)/properties/%,%,$(f)) \
     $(f):$(TARGET_COPY_OUT_RECOVERY)/root/vendor/odm/etc/$(patsubst $(LOCAL_PATH)/properties/%,%,$(f)))
 
+# Power: caihong mode extension (Battery Saver CPU/GPU cap, game loading boost, idle limits)
+$(call soong_config_set,qti_power,mode_ext,//$(LOCAL_PATH):libpower_ext_caihong)
+
 # Recovery
 $(call soong_config_set_bool,recovery,target_recovery_uses_qti_drm,true)
 

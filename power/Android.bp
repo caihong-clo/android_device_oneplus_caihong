@@ -16,3 +16,25 @@ cc_library_static {
     ],
     vendor: true,
 }
+
+rust_defaults {
+    name: "libpower_ext_caihong-defaults",
+    crate_name: "power_ext",
+    vendor: true,
+    srcs: ["power_mode.rs"],
+    rustlibs: [
+        "android.hardware.power-V6-rust",
+        "liblog_rust",
+    ],
+}
+
+rust_library {
+    name: "libpower_ext_caihong",
+    defaults: ["libpower_ext_caihong-defaults"],
+}
+
+rust_test {
+    name: "libpower_ext_caihong-test",
+    defaults: ["libpower_ext_caihong-defaults"],
+    test_suites: ["general-tests"],
+}

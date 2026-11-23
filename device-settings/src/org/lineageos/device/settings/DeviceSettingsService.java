@@ -4,7 +4,7 @@
  *
  * Central service for DeviceSettings.
  * - Always running after boot
- * - Handles power connect/disconnect events
+ * - Handles power connect/disconnect and screen on/off events
  * - Initializes and manages other services/controllers
  */
 
@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import org.lineageos.device.settings.bypasschrg.BypassChargingController;
 import org.lineageos.device.settings.bypasschrg.BypassChargingManager;
+import org.lineageos.device.settings.fastcharge.ChargeThermalLimiter;
 import org.lineageos.device.settings.fastcharge.FastChargeController;
 
 public class DeviceSettingsService extends Service {
@@ -37,7 +38,7 @@ public class DeviceSettingsService extends Service {
         // Initialize all subsystems
         initializeSubsystems();
 
-        // Register receivers for power events
+        // Register receivers for power and screen events
         registerReceivers();
     }
 
@@ -87,6 +88,8 @@ public class DeviceSettingsService extends Service {
             // USER_VOTER does not survive a reboot, so the persisted cap has to be
             // written again here
             FastChargeController.getInstance(this).restore();
+            // Charging current by case temperature, on top of the persisted cap
+            ChargeThermalLimiter.getInstance(this).init();
             if (Constants.DEBUG) Log.i(TAG, "FastCharging initialized");
         } catch (Exception e) {
             Log.e(TAG, "Failed to initialize FastCharging", e);
@@ -113,6 +116,11 @@ public class DeviceSettingsService extends Service {
                     case Intent.ACTION_POWER_DISCONNECTED:
                         handlePowerDisconnected();
                         break;
+                    case Intent.ACTION_SCREEN_ON:
+                    case Intent.ACTION_SCREEN_OFF:
+                        ChargeThermalLimiter.getInstance(DeviceSettingsService.this)
+                                .setScreenOn(Intent.ACTION_SCREEN_ON.equals(action));
+                        break;
                 }
             }
         };
@@ -120,6 +128,8 @@ public class DeviceSettingsService extends Service {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
 
         try {
             registerReceiver(mReceiver, filter);
@@ -152,6 +162,7 @@ public class DeviceSettingsService extends Service {
         }
 
         try {
+            ChargeThermalLimiter.getInstance(this).setCharging(true);
             FastChargeController.getInstance(this).restore();
         } catch (Exception e) {
             Log.e(TAG, "Failed to restore fast charging on connect", e);
@@ -173,6 +184,7 @@ public class DeviceSettingsService extends Service {
         // USER_VOTER survives unplug, so clear the session boost and re-apply the
         // persisted cap now for the next plug
         try {
+            ChargeThermalLimiter.getInstance(this).setCharging(false);
             FastChargeController.getInstance(this).restore();
         } catch (Exception e) {
             Log.e(TAG, "Failed to restore fast charging on disconnect", e);

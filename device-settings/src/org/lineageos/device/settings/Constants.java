@@ -56,6 +56,9 @@ public class Constants {
     public static final int HUD_MODE_STANDARD = 1;
     public static final int HUD_MODE_NIGHT = 2;
 
+    /** horae case temperature zones; the hottest picks the charging gear. */
+    public static final String[] CASE_TEMP_ZONES = {"shell_back", "shell_frame", "shell_front"};
+
     /** Sent by SystemUI on long-press inside the charging ring. */
     public static final String ACTION_BOOST_CHARGING =
             "org.lineageos.device.settings.action.BOOST_CHARGING";

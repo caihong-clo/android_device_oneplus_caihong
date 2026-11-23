@@ -88,6 +88,13 @@ public class FastChargeController {
         }
     }
 
+    /** Re-apply the current cap, keeping a session boost; for case temperature changes. */
+    public void reapply() {
+        synchronized (mLock) {
+            apply();
+        }
+    }
+
     /**
      * Re-apply the persisted cap and drop any session boost. USER_VOTER does not survive
      * a reboot, so this has to run at boot; it survives unplug, so disconnect re-applies
@@ -119,12 +126,16 @@ public class FastChargeController {
             hudMode = Constants.HUD_MODE_STANDARD;
         }
 
-        FileUtils.writeLine(Constants.NODE_FAST_CHARGING, value);
+        // The case temperature cap applies on top of the user setting and the session boost.
+        final int thermal = ChargeThermalLimiter.getInstance(mContext).coolDown();
+        final String written = String.valueOf(
+                ChargeGears.stricter(Integer.parseInt(value), thermal));
+        FileUtils.writeLine(Constants.NODE_FAST_CHARGING, written);
 
         // COOL_DOWN is VOTE_MIN on the VOOC votable: USB temp and friends can hold it
         // lower than we asked, so a differing readback is not a failure.
         if (Constants.DEBUG) {
-            Log.i(TAG, "cool_down=" + value
+            Log.i(TAG, "cool_down=" + written + " (setting " + value + ", thermal " + thermal + ")"
                     + " readback=" + FileUtils.readLineTrimmed(Constants.NODE_FAST_CHARGING)
                     + " boost=" + mSessionBoost);
         }

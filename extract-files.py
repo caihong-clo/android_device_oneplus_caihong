@@ -88,7 +88,7 @@ module = ExtractUtilsModule(
 add_generated_thermal_engine_config(
     module,
     horae_target_config='system_ext/etc/horae/horae_SM8650_CAIHONG.conf',
-    boost_ceiling_below=39,
+    boost_ceiling_below=35,
 )
 
 if __name__ == '__main__':

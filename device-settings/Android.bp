@@ -16,7 +16,6 @@ android_app {
     platform_apis: true,
     system_ext_specific: true,
     privileged: true,
-    init_rc: ["init.device.settings.rc"],
 
     static_libs: [
         "ax_compose",

@@ -4,7 +4,6 @@
  *
  * Central service for DeviceSettings.
  * - Always running after boot
- * - Handles screen on/off events
  * - Handles power connect/disconnect events
  * - Initializes and manages other services/controllers
  */
@@ -17,23 +16,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
-import android.os.UserHandle;
-import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceManager;
 
 import org.lineageos.device.settings.bypasschrg.BypassChargingController;
 import org.lineageos.device.settings.bypasschrg.BypassChargingManager;
-import org.lineageos.device.settings.display.AodBrightnessController;
-import org.lineageos.device.settings.display.DisplayModeController;
-import org.lineageos.device.settings.display.HbmController;
-import org.lineageos.device.settings.display.PwmController;
-import org.lineageos.device.settings.display.SunlightBoostController;
 import org.lineageos.device.settings.fastcharge.FastChargeController;
-import org.lineageos.device.settings.utils.FileUtils;
 
 public class DeviceSettingsService extends Service {
     private static final String TAG = "DeviceSettingsService";
@@ -48,7 +37,7 @@ public class DeviceSettingsService extends Service {
         // Initialize all subsystems
         initializeSubsystems();
 
-        // Register receivers for screen and power events
+        // Register receivers for power events
         registerReceivers();
     }
 
@@ -76,43 +65,6 @@ public class DeviceSettingsService extends Service {
     private void initializeSubsystems() {
         initializeBypassCharging();
         initializeFastCharging();
-        initializePwm();
-        initializeTestTe();
-        initializeHbm();
-        initializeSunlightBoost();
-        initializeAodBrightness();
-    }
-
-    private void initializeAodBrightness() {
-        if (Constants.DEBUG) Log.i(TAG, "Initializing AOD brightness");
-        try {
-            // Pins a forced mode; auto leaves the boot level to the sensors HAL.
-            AodBrightnessController.getInstance(this).restoreAodBrightness();
-            if (Constants.DEBUG) Log.i(TAG, "AOD brightness initialized");
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to initialize AOD brightness", e);
-        }
-    }
-
-    private void initializeHbm() {
-        // A reboot with HBM on leaves the preference and the auto-brightness
-        // backup behind while the panel comes up with hbm_max off. No screen-on
-        // broadcast is sent at boot, so reconcile here as well.
-        try {
-            HbmController.getInstance(this).syncState();
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to sync HBM state at boot", e);
-        }
-    }
-
-    private void initializeSunlightBoost() {
-        if (Constants.DEBUG) Log.i(TAG, "Initializing SunlightBoost");
-        try {
-            SunlightBoostController.getInstance(this).init();
-            if (Constants.DEBUG) Log.i(TAG, "SunlightBoost initialized");
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to initialize SunlightBoost", e);
-        }
     }
 
     private void initializeBypassCharging() {
@@ -141,32 +93,6 @@ public class DeviceSettingsService extends Service {
         }
     }
 
-    private void initializePwm() {
-        if (Constants.DEBUG) Log.i(TAG, "Initializing PWM");
-        try {
-            PwmController.getInstance(this).restorePwmSetting();
-            if (Constants.DEBUG) Log.i(TAG, "PWM initialized");
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to initialize PWM", e);
-        }
-    }
-
-    private void initializeTestTe() {
-        // Enable the panel test-TE irq so the node reports the real DDIC
-        // self-refresh rate, consumed by the SurfaceFlinger "Show refresh rate"
-        // overlay via ro.surface_flinger.panel_refresh_rate_node
-        try {
-            if (FileUtils.isFileWritable(Constants.NODE_TEST_TE)) {
-                FileUtils.writeLine(Constants.NODE_TEST_TE, "1");
-                if (Constants.DEBUG) Log.i(TAG, "Test-TE counter enabled");
-            } else {
-                Log.w(TAG, "Test-TE node is not writable");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to enable test-TE counter", e);
-        }
-    }
-
     // ===== Receivers =====
 
     private void registerReceivers() {
@@ -181,12 +107,6 @@ public class DeviceSettingsService extends Service {
                 if (Constants.DEBUG) Log.i(TAG, "Received: " + action);
 
                 switch (action) {
-                    case Intent.ACTION_SCREEN_OFF:
-                        handleScreenOff();
-                        break;
-                    case Intent.ACTION_SCREEN_ON:
-                        handleScreenOn();
-                        break;
                     case Intent.ACTION_POWER_CONNECTED:
                         handlePowerConnected();
                         break;
@@ -198,8 +118,6 @@ public class DeviceSettingsService extends Service {
         };
 
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
 
@@ -219,39 +137,6 @@ public class DeviceSettingsService extends Service {
             } catch (Exception ignored) {}
             mReceiver = null;
         }
-    }
-
-    // ===== Screen Event Handlers =====
-
-    private void handleScreenOff() {
-        if (Constants.DEBUG) Log.i(TAG, "Screen OFF");
-
-        // Re-assert a forced AOD level before LP1 so lux_aod cannot win the
-        // race. Auto mode writes nothing and leaves the level to lux_aod.
-        try {
-            AodBrightnessController.getInstance(this).restoreAodBrightness();
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to restore AOD brightness on screen off", e);
-        }
-
-        // HBM cannot be released here: the kernel rejects hbm_max writes once the
-        // panel has left DPMS_ON. Sunlight boost keeps ownership and releases it
-        // after the next screen-on; the displayed state is synced on screen-on.
-
-    }
-
-    private void handleScreenOn() {
-        if (Constants.DEBUG) Log.i(TAG, "Screen ON");
-
-        // Sync HBM state: reconcile our preference with the node and refresh the
-        // tile/switch, which could otherwise show a stale state.
-        try {
-            HbmController.getInstance(this).syncState();
-            DisplayModeController.getInstance(this).broadcastStateChange();
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to sync HBM state on screen on", e);
-        }
-
     }
 
     // ===== Power Event Handlers =====

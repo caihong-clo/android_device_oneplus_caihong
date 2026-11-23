@@ -16,53 +16,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_title">OnePlus Settings</string>
-    <string name="device_summary">Extra settings for OnePlus 13</string>
-
-    <!-- Notification slider -->
-    <string name="notification_slider_category_title">Alert slider</string>
-    <string name="notification_slider_title">Alert slider settings</string>
-    <string name="notification_slider_selection_dialog_title">Action</string>
-    <string name="notification_slider_top_position">Top position</string>
-    <string name="notification_slider_middle_position">Middle position</string>
-    <string name="notification_slider_bottom_position">Bottom position</string>
-    <string name="notification_slider_mode_total_silence">Total silence</string>
-    <string name="notification_slider_mode_alarms_only">Alarms only</string>
-    <string name="notification_slider_mode_priority_only">Priority only</string>
-    <string name="notification_slider_mode_none">All</string>
-    <string name="notification_slider_usage_title">Use slider for</string>
-    <string name="notification_slider_for_notification">Notification</string>
-    <string name="notification_slider_for_flashlight">Flashlight</string>
-    <string name="notification_slider_for_brightness">Brightness</string>
-    <string name="notification_slider_for_rotation">Rotation</string>
-    <string name="notification_slider_for_ringer">Ringer</string>
-    <string name="notification_slider_for_notification_ringer">Notification and ringer</string>
-    <string name="notification_slider_for_applaunch">Launch app</string>
-    <string name="notification_slider_applaunch_launch">Launch app</string>
-    <string name="notification_slider_app_none">No app selected</string>
-    <string name="notification_slider_app_dialog_title">Select app</string>
-    <string name="notification_slider_app_clear">Clear</string>
-    <string name="notification_slider_flashlight_off">Off</string>
-    <string name="notification_slider_flashlight_on">On</string>
-    <string name="notification_slider_flashlight_blink">Blink</string>
-    <string name="notification_slider_brightness_auto">Auto</string>
-    <string name="notification_slider_brightness_brightest">Brightest</string>
-    <string name="notification_slider_brightness_darkest">Darkest</string>
-    <string name="notification_slider_rotation_auto">Auto</string>
-    <string name="notification_slider_rotation_portrait">Portrait</string>
-    <string name="notification_slider_rotation_landscape_90">Landscape (90°)</string>
-    <string name="notification_slider_rotation_landscape_270">Landscape (270°)</string>
-    <string name="notification_slider_ringer_normal">Normal</string>
-    <string name="notification_slider_ringer_vibrate">Vibrate</string>
-    <string name="notification_slider_ringer_silent">Silent</string>
-
-    <!-- Vibration & Haptics -->
-    <string name="vibration_category_title">Vibration &amp; Haptics</string>
-    <string name="haptic_profile_title">Haptic profile</string>
-    <string name="haptic_profile_op13crisp">OnePlus 13 Crisp (Stock - Default)</string>
-    <string name="haptic_profile_op13gentle">OnePlus 13 Gentle (Soft)</string>
-    <string name="haptic_profile_yaap_gentle">YAAP Gentle</string>
-    <string name="haptic_profile_yaap_crisp">YAAP Crisp</string>
-    <string name="haptic_profile_richtap">RichTap Standard</string>
+    <string name="device_summary">Extra settings for OnePlus Pad 2</string>
 
     <!-- Gaming category -->
     <string name="gaming_category_title">Gaming</string>
@@ -71,14 +25,18 @@
     <!-- Battery category -->
     <string name="battery_category_title">Battery</string>
     <string name="fast_charging_title">Fast charging</string>
-    <string name="fast_charging_summary">Allow SuperVOOC up to 100W</string>
+    <string name="fast_charging_summary">Allow SUPERVOOC up to 67W</string>
     <string name="night_charging_title">Night mode</string>
-    <string name="night_charging_summary">Limit charging current to 1.5A</string>
+    <string name="night_charging_summary">Limit charging current to 2A</string>
+    <string name="battery_health_title">Battery health</string>
+    <string name="battery_health_summary">%d%% of original capacity</string>
+    <string name="battery_health_unknown">Not reported</string>
+    <string name="notification_slider_app_clear">Clear</string>
 
     <!-- Bypass chargings -->
     <string name="bypass_charging_category_title" translatable="false">@string/bypass_charging_title</string>
     <string name="bypass_charging_title">Bypass charging</string>
-    <string name="bypass_charging_summary">Supply power directly to the phone</string>
+    <string name="bypass_charging_summary">Supply power directly to the tablet</string>
     <string name="bypass_charging_info_title">Bypass charging supplies power directly to the board, instead of the battery, helping to reduce device heat, when running demanding applications like games.</string>
     <string name="bypass_charging_unavailable">Bypass charging is not supported on this device</string>
     <string name="bypass_charging_enabled">Enabled</string>
@@ -244,31 +202,6 @@
     <string name="game_bar_longpress_timeout_normal">1500ms (Normal)</string>
     <string name="game_bar_longpress_timeout_slow">2000ms (Slow)</string>
 
-    <!-- Display -->
-    <string name="display_category_title">Display</string>
-
-    <!-- One-Pulse PWM (Classic) mode -->
-    <string name="onepulse_pwm_mode_title">One-Pulse PWM</string>
-    <string name="onepulse_pwm_mode_summary">Enable One-Pulse (high frequency) PWM to reduce display flicker at mid or high brightness levels</string>
-
-    <!-- HBM -->
-    <string name="hbm_category_title" translatable="false">@string/hbm_title</string>
-    <string name="hbm_title">HBM</string>
-    <string name="hbm_summary">High Brightness Mode</string>
-    <string name="sunlight_boost_title">Auto sunlight boost</string>
-    <string name="sunlight_boost_summary">Boost to peak panel brightness in direct sunlight (above 40,000 lux), like stock. Releases below 20,000 lux</string>
-    <string name="hbm_unavailable">High Brightness Mode is not supported on this device</string>
-    <string name="hbm_warning_title">Warning</string>
-    <string name="hbm_warning_summary">HBM accelerates cumulative panel degradation. So use it only when necessary and for short periods of time.\n</string>
-    <string name="hbm_btn_enable">Enable</string>
-    <string name="hbm_warning_dont_show_again">Don\'t show this warning again</string>
-
-    <!-- AOD brightness (stock: adaptive from the light sensor, 10 or 50 nits) -->
-    <string name="aod_brightness_title">AOD brightness</string>
-    <string name="aod_brightness_auto">Automatic (light sensor)</string>
-    <string name="aod_brightness_high">High (50 nits)</string>
-    <string name="aod_brightness_low">Low (10 nits)</string>
-
     <!-- Refresh Rate Settings -->
     <string name="refresh_rate_title">Refresh rate</string>
     <string name="refresh_rate_app_title">Per-App Refresh Rate</string>
@@ -291,7 +224,6 @@
     <string name="refresh_rate_120hz" translatable="false">120 Hz</string>
 
     <!-- HBM/PWM/RefreshRate tile messages -->
-    <string name="hbm_unavailable_pwm_active">PWM is active</string>
     <string name="refresh_rate_locked_hbm">Locked at 120Hz (HBM)</string>
 
     <!-- Generic -->

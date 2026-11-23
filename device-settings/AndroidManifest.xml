@@ -22,16 +22,11 @@
           android:versionCode="1"
           android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INJECT_EVENTS"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
 
-    <protected-broadcast android:name="org.lineageos.device.settings.UPDATE_SLIDER_SETTINGS" />
-    <protected-broadcast android:name="org.lineageos.device.settings.UPDATE_SLIDER_POSITION" />
     <protected-broadcast android:name="org.lineageos.device.settings.action.BOOST_CHARGING" />
 
     <application
@@ -96,18 +91,6 @@
                 android:name="com.android.settings.icon_color_scheme"
                 android:value="grey" />
         </activity>
-
-        <service
-            android:name=".KeyHandler"
-            android:permission="KeyHandlerService"
-            android:exported="true" />
-
-        <receiver android:name=".Startup"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
-            </intent-filter>
-        </receiver>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -176,28 +159,5 @@
             </intent-filter>
         </activity>
 
-        <!-- HBM Quick Settings Tile -->
-        <service
-            android:name="org.lineageos.device.settings.display.HbmTile"
-            android:label="@string/hbm_title"
-            android:icon="@drawable/ic_hbm"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <!-- PWM Quick Settings Tile -->
-        <service
-            android:name="org.lineageos.device.settings.display.PwmTile"
-            android:label="@string/onepulse_pwm_mode_title"
-            android:icon="@drawable/ic_pwm"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
     </application>
 </manifest>

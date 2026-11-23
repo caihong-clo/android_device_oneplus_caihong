@@ -9,9 +9,11 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.lineageos.device.settings.R
 import org.lineageos.device.settings.ui.screens.BypassChargingScreen
 import org.lineageos.device.settings.ui.screens.MainScreen
 
@@ -26,27 +28,29 @@ fun DeviceSettingsApp(
     onFinish: () -> Unit,
 ) {
     val navController = rememberNavController()
-    BackHandler {
+    val back: () -> Unit = {
         if (!navController.popBackStack()) onFinish()
     }
-    DeviceSettingsScaffold(
-        onBack = {
-            if (!navController.popBackStack()) onFinish()
-        },
-    ) { padding ->
-        NavHost(
-            navController = navController,
-            startDestination = start.route,
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            composable(DeviceSettingsDest.Main.route) {
+    BackHandler(onBack = back)
+    NavHost(
+        navController = navController,
+        startDestination = start.route,
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        composable(DeviceSettingsDest.Main.route) {
+            DeviceSettingsScaffold(title = stringResource(R.string.device_title), onBack = back) {
                 MainScreen(
-                    contentPadding = padding,
+                    contentPadding = it,
                     onOpenBypass = { navController.navigate(DeviceSettingsDest.Bypass.route) },
                 )
             }
-            composable(DeviceSettingsDest.Bypass.route) {
-                BypassChargingScreen(contentPadding = padding)
+        }
+        composable(DeviceSettingsDest.Bypass.route) {
+            DeviceSettingsScaffold(
+                title = stringResource(R.string.bypass_charging_title),
+                onBack = back,
+            ) {
+                BypassChargingScreen(contentPadding = it)
             }
         }
     }

@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -210,45 +209,5 @@ fun ConfirmDeleteDialog(
                 Text(stringResource(android.R.string.cancel))
             }
         },
-    )
-}
-
-@Composable
-fun HbmWarningDialog(
-    onEnable: (dontShowAgain: Boolean) -> Unit,
-    onCancel: () -> Unit,
-) {
-    val checked = androidx.compose.runtime.remember {
-        androidx.compose.runtime.mutableStateOf(false)
-    }
-    AlertDialog(
-        onDismissRequest = {},
-        title = { Text(stringResource(R.string.hbm_warning_title)) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(stringResource(R.string.hbm_warning_summary))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Checkbox(
-                        checked = checked.value,
-                        onCheckedChange = { checked.value = it },
-                    )
-                    Text(stringResource(R.string.hbm_warning_dont_show_again))
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = { onEnable(checked.value) }) {
-                Text(stringResource(R.string.hbm_btn_enable))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onCancel) {
-                Text(stringResource(android.R.string.cancel))
-            }
-        },
-        properties = androidx.compose.ui.window.DialogProperties(
-            dismissOnBackPress = false,
-            dismissOnClickOutside = false,
-        ),
     )
 }

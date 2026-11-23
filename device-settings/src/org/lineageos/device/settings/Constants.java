@@ -16,87 +16,10 @@
 
 package org.lineageos.device.settings;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.UserHandle;
-import android.provider.Settings;
-import androidx.preference.PreferenceManager;
-
-import android.media.AudioManager;
-
 public class Constants {
 
     /* Debug flag */
     public static final boolean DEBUG = true;
-
-    // Device name prop
-    public static final String PROP_DEVICE_CODENAME = "ro.alpha.device";
-
-    /* Alert Slider */
-    public static final String NODE_SLIDER_STATE = "/proc/tristatekey/tri_state";
-
-    public static final String KEY_NOTIF_SLIDER_PANEL = "notification_slider";
-    public static final String KEY_NOTIF_SLIDER_USAGE = "slider_usage";
-    public static final String KEY_NOTIF_SLIDER_ACTION_TOP = "action_top_position";
-    public static final String KEY_NOTIF_SLIDER_ACTION_MIDDLE = "action_middle_position";
-    public static final String KEY_NOTIF_SLIDER_ACTION_BOTTOM = "action_bottom_position";
-
-    /* Per-position apps for the app-launch slider usage */
-    public static final String KEY_NOTIF_SLIDER_APP_TOP = "slider_app_top_position";
-    public static final String KEY_NOTIF_SLIDER_APP_MIDDLE = "slider_app_middle_position";
-    public static final String KEY_NOTIF_SLIDER_APP_BOTTOM = "slider_app_bottom_position";
-
-    public static final String EXTRA_SLIDER_USAGE = "usage";
-    public static final String EXTRA_SLIDER_ACTIONS = "actions";
-    public static final String EXTRA_SLIDER_APPS = "slider_apps";
-
-    public static final String NOTIF_SLIDER_FOR_NOTIFICATION = "1";
-    public static final String NOTIF_SLIDER_FOR_FLASHLIGHT = "2";
-    public static final String NOTIF_SLIDER_FOR_BRIGHTNESS = "3";
-    public static final String NOTIF_SLIDER_FOR_ROTATION = "4";
-    public static final String NOTIF_SLIDER_FOR_RINGER = "5";
-    public static final String NOTIF_SLIDER_FOR_NOTIFICATION_RINGER = "6";
-    public static final String NOTIF_SLIDER_FOR_APPLAUNCH = "7";
-
-    public static final String ACTION_UPDATE_SLIDER_POSITION
-            = "org.lineageos.device.settings.UPDATE_SLIDER_POSITION";
-    public static final String ACTION_UPDATE_SLIDER_SETTINGS
-            = "org.lineageos.device.settings.UPDATE_SLIDER_SETTINGS";
-    public static final String EXTRA_SLIDER_POSITION = "position";
-    public static final String EXTRA_SLIDER_POSITION_VALUE = "position_value";
-    public static final String EXTRA_SLIDER_PACKAGE = "package";
-
-    public static final int MODE_TOTAL_SILENCE = 600;
-    public static final int MODE_ALARMS_ONLY = 601;
-    public static final int MODE_PRIORITY_ONLY = 602;
-    public static final int MODE_NONE = 603;
-    public static final int MODE_VIBRATE = 604;
-    public static final int MODE_RING = 605;
-    public static final int MODE_SILENT = 620;
-    public static final int MODE_FLASHLIGHT_ON = 621;
-    public static final int MODE_FLASHLIGHT_OFF = 622;
-    public static final int MODE_FLASHLIGHT_BLINK = 623;
-    public static final int MODE_BRIGHTNESS_BRIGHT = 630;
-    public static final int MODE_BRIGHTNESS_DARK = 631;
-    public static final int MODE_BRIGHTNESS_AUTO = 632;
-    public static final int MODE_ROTATION_AUTO = 640;
-    public static final int MODE_ROTATION_0 = 641;
-    public static final int MODE_ROTATION_90 = 642;
-    public static final int MODE_ROTATION_270 = 643;
-    // Must match MODE_APP_LAUNCH in SystemUI TriStateUiControllerImpl
-    public static final int MODE_APP_LAUNCH = 650;
-
-    // Holds <preference_key> -> <proc_node> mapping
-    public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
-    public static final Map<String, String> sStringNodePreferenceMap = new HashMap<>();
-
-
-    /* OnePulse PWM */
-    public static final String NODE_ONEPULSE_PWM = "/sys/kernel/oplus_display/pwm_onepulse";
-    public static final String KEY_ONEPULSE_PWM = "onepulse_pwm";
 
     /* Bypass Charging */
     public static final String NODE_BYPASS_CHARGING = "/sys/class/oplus_chg/battery/mmi_charging_enable";
@@ -117,11 +40,11 @@ public class Constants {
     public static final String KEY_FAST_CHARGING = "fast_charging";
     public static final String KEY_NIGHT_CHARGING = "night_charging";
 
-    /** cool_down steps on svooc_2_0_curr_table (Ibus mA), DT vooc_curr_table_type=2.
-     *  0 unvotes USER_VOTER entirely: the 9.5 A / 100 W brick class. */
+    /** cool_down steps on cp_curr_table (battery mA), DT vooc_curr_table_type =
+     *  VOOC_CP_CURR_TABLE. 0 unvotes USER_VOTER entirely: the 67 W charger class. */
     public static final String COOL_DOWN_UNLIMITED = "0";
-    public static final String COOL_DOWN_NIGHT = "1";      // 1500 mA
-    public static final String COOL_DOWN_STANDARD = "5";   // 3000 mA
+    public static final String COOL_DOWN_NIGHT = "1";      // 2000 mA
+    public static final String COOL_DOWN_STANDARD = "5";   // 3400 mA
 
     /** Mirrored to Settings.System for the SystemUI charging HUD, which must not
      *  read oplus_chg itself (platform_app is denied search on that dir). */
@@ -137,69 +60,10 @@ public class Constants {
     public static final String ACTION_BOOST_CHARGING =
             "org.lineageos.device.settings.action.BOOST_CHARGING";
 
-    /* HBM */
-    public static final String NODE_HBM = "/sys/kernel/oplus_display/hbm_max";
-    public static final String KEY_HBM = "hbm_max";
-
-    /** Automatic sunlight boost: drives hbm_max from the light sensor with the
-     *  stock hbm_lux_table thresholds (enter 40000 lux, exit 20000 lux). */
-    public static final String KEY_SUNLIGHT_BOOST = "sunlight_boost";
-
-    /** AOD brightness, stock binary levels via OFP: write 0 = high (~50 nits),
-     *  1 = low (~10 nits). The sensors HAL writes bare levels from lux_aod
-     *  (stock ColorOS adaptive AOD). A "force" tag pins the level and makes the
-     *  kernel ignore bare writes until reboot; an "auto" tag releases that pin.
-     *  Default is auto, matching ColorOS. */
-    public static final String NODE_AOD_LIGHT_MODE =
-            "/sys/kernel/oplus_display/aod_light_mode_set";
-    public static final String KEY_AOD_BRIGHTNESS_MODE = "aod_brightness_mode";
-    public static final String AOD_BRIGHTNESS_AUTO = "auto";
-    public static final String AOD_BRIGHTNESS_HIGH = "high";
-    public static final String AOD_BRIGHTNESS_LOW = "low";
-    public static final String AOD_BRIGHTNESS_DEFAULT = AOD_BRIGHTNESS_AUTO;
-
-    /** Haptic profile, read live by the dodge vibrator effect lib on every effect.
-     *  The default must match the effect lib and device.mk. */
-    public static final String PROP_HAPTIC_PROFILE = "persist.sys.haptic_profile";
-    public static final String HAPTIC_PROFILE_DEFAULT = "op13crisp";
-
-    /** Panel test-TE counter: real DDIC self-refresh rate (LTPO). Write "1" to
-     *  enable the irq (done at boot by DeviceSettingsService); reads return the
-     *  measured rate, or 0 until two TE pulses have been observed. Consumed by the
-     *  SurfaceFlinger "Show refresh rate" overlay via
-     *  ro.surface_flinger.panel_refresh_rate_node, not by device-settings. */
-    public static final String NODE_TEST_TE = "/sys/kernel/oplus_display/test_te";
-
-    /** CRTC frame-done counter = SurfaceFlinger composition rate (NOT the panel
-     *  self-refresh rate). This is what the crDroid FPS Info tile shows
-     *  (config_fpsInfoSysNode); GameBar reads the same node for a matching number.
-     *  The sm8750 (sun) kernel names the CRTC sysfs device "card0-sde-crtc-0"
-     *  (device_create "card%d-sde-crtc-%d"), unlike sm8550/sm8650's "sde-crtc-0". */
-    public static final String NODE_MEASURED_FPS = "/sys/class/drm/card0-sde-crtc-0/measured_fps";
-
-    /** ADFR/LTPO min fps request: 0 = auto (panel self-refresh drops to the
-     *  timing's lowest table entry: 20Hz active floor, 1Hz idle), N = fixed
-     *  (kernel clamps into the current timing's table, so 120 pins the DDIC
-     *  at the mode rate). Applied by the kernel immediately and re-applied on
-     *  every panel enable/timing switch. Only HbmController writes it: 120
-     *  while HBM is on, 0 on release; LTPO is otherwise always on. */
-    public static final String NODE_ADFR_MIN_FPS = "/sys/kernel/oplus_display/min_fps";
-
-    /** LTPO (adaptive refresh) master switch: on = panel self-refresh floor is
-     *  dynamic (min_fps 0 -> kernel maps to 1: 20Hz active floor, 1Hz idle),
-     *  off = panel pinned to the mode rate (no idle drop). Only read by the
-     *  refreshrate package, which is no longer registered: LTPO stays on. */
-    public static final String KEY_LTPO_ENABLED = "ltpo_enabled";
-
-    /** Broadcast sent whenever the LTPO master switch changes, so the QS tile
-     *  (LtpoTile) and any other UI stays in sync. Package-scoped, same app. */
-    public static final String ACTION_LTPO_STATE_CHANGED =
-            "org.lineageos.device.settings.action.LTPO_STATE_CHANGED";
-
-    /** Refresh rate */
-    public static final String KEY_REFRESH_RATE_MODE = "refresh_rate_mode";
-    /** SharedPreferences key for per-app refresh rate overrides (pipe-separated "pkg:fps|pkg:fps") */
-    public static final String KEY_REFRESH_RATE_APPS = "refresh_rate_apps";
-    /** 0 = auto: leave the system refresh rate settings untouched */
-    public static final int REFRESH_RATE_DEFAULT = 0;
+    /* Battery health */
+    public static final String NODE_SOH_UI = "/sys/class/oplus_chg/battery/ui_soh";
+    public static final String NODE_SOH_BATTERY = "/sys/class/oplus_chg/battery/battery_soh";
+    public static final String NODE_CHARGE_FULL = "/sys/class/power_supply/battery/charge_full";
+    public static final String NODE_CHARGE_FULL_DESIGN =
+            "/sys/class/power_supply/battery/charge_full_design";
 }

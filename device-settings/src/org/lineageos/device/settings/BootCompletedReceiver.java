@@ -27,19 +27,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        // PenguinOS: AOSPA has no lineage-sdk LineageHardwareService, so
-        // INITIALIZE_LINEAGE_HARDWARE (Startup) never fires. Seed the slider prefs and push them
-        // to the KeyHandler here instead, once per boot (the app is directBootAware / DE storage).
-        if (Intent.ACTION_LOCKED_BOOT_COMPLETED.equals(intent.getAction())) {
-            try {
-                DeviceSettings.restoreSliderStates(context);
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to restore slider states", e);
-            }
-        }
-
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            if (Constants. DEBUG) Log.i(TAG, "Boot completed - starting DeviceSettingsService");
+            if (Constants.DEBUG) Log.i(TAG, "Boot completed - starting DeviceSettingsService");
 
             try {
                 Intent serviceIntent = new Intent(context, DeviceSettingsService.class);

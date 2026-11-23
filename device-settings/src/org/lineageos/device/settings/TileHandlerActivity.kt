@@ -25,8 +25,6 @@ import android.service.quicksettings.TileService
 import android.util.Log
 import org.lineageos.device.settings.bypasschrg.BypassChargingActivity
 import org.lineageos.device.settings.bypasschrg.BypassChargingTile
-import org.lineageos.device.settings.display.HbmTile
-import org.lineageos.device.settings.display.PwmTile
 
 class TileHandlerActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,8 +76,6 @@ class TileHandlerActivity : Activity() {
 
         private val TILE_ACTIVITY_MAP = mapOf(
             BypassChargingTile::class.java.name to BypassChargingActivity::class.java,
-            HbmTile::class.java.name to DeviceSettingsActivity::class.java,
-            PwmTile::class.java.name to DeviceSettingsActivity::class.java,
         )
     }
 }

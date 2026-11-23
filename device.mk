@@ -13,6 +13,10 @@ TARGET_NO_TELEPHONY := true
 PRODUCT_PACKAGES += \
     PenguinPods
 
+# Device settings: bypass, fast and night charging
+PRODUCT_PACKAGES += \
+    DeviceSettings
+
 # AAPT
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
